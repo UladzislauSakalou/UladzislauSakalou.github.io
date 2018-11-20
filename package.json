@@ -1,0 +1,29 @@
+{
+  "name": "uladzislausakalou.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "babel src/js -d public",
+    "watch": "babel src/js --watch -d public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UladzislauSakalou/UladzislauSakalou.github.io.git"
+  },
+  "author": "Vlados",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UladzislauSakalou/UladzislauSakalou.github.io/issues"
+  },
+  "homepage": "https://github.com/UladzislauSakalou/UladzislauSakalou.github.io#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@babel/runtime": "^7.1.5",
+    "regenerator": "^0.13.3"
+  }
+}

@@ -3,7 +3,7 @@
 
 <head>
   <title>News Application</title>
-  <link rel="stylesheet" type="text/css" href="./css/main.css">
+  <link rel="stylesheet" type="text/css" href="./src/css/main.css">
 </head>
 
 <body>
@@ -26,6 +26,12 @@
     powered by NewsAPI.org
   </footer>
 </body>
-<script type="module" src="js/main.js"></script>
+<script type="text/javascript" src="./node_modules/regenerator-runtime/runtime.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.3/fetch.js"></script>
+<script type="text/javascript" src="./public/core/constants.js"></script>
+<script type="text/javascript" src="./public/services/articleService.js"></script>
+<script type="text/javascript" src="./public/services/sourceService.js"></script>
+<script type="text/javascript" src="./public/main.js"></script>
 
 </html>
