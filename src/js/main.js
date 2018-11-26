@@ -1,4 +1,6 @@
+import * as sourceService from './services/sourceService.js';
+
 window.onload = function() {
-    addListeners();
-    showSources();
+    sourceService.addListeners();
+    sourceService.showSources();
 };

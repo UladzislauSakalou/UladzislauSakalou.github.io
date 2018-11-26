@@ -1,4 +1,6 @@
-async function showArticles(source) {
+import { Constants } from '../core/constants.js';
+
+export async function showArticles(source) {
     let response = await getArticles(source);
     document.getElementById("articles").innerHTML = "";
     response.articles.map(getArticleDetails).forEach(showArticle);

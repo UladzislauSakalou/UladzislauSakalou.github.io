@@ -1,15 +1,18 @@
-async function showSources() {
+import { Constants } from '../core/constants.js';
+import * as articleService from './articleService.js';
+
+export async function showSources() {
     let response = await getSources();
     response.sources.map(getSourceDetails).forEach(showSource);
 }
 
-function addListeners() {
+export function addListeners() {
     document.getElementById("sourceSelected").addEventListener("change", showArticlesForSelectedSource);
 }
 
 function showArticlesForSelectedSource() {
     let sourceSelected = document.getElementById("sourceSelected").value;
-    showArticles(sourceSelected);
+    articleService.showArticles(sourceSelected);
 }
 
 async function getSources() {
