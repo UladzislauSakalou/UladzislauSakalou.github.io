@@ -8,7 +8,7 @@ module.exports = {
     },
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, './dist')
+        path: path.resolve(__dirname)
     },
     module: {
         rules: [
@@ -66,7 +66,11 @@ module.exports = {
         new FriendlyErrorsWebpackPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'index.html'
+            template: './src/html/index.html'
         })
+        // new HtmlWebpackPlugin({
+        //     filename: './test.html',
+        //     template: './src/html/index.html'
+        //   })
     ]
 };
