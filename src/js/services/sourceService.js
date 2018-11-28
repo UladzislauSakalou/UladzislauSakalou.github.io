@@ -1,5 +1,4 @@
 import { Constants } from '../core/constants.js';
-import * as articleService from './articleService.js';
 
 export async function showSources() {
     let response = await getSources();
@@ -7,12 +6,15 @@ export async function showSources() {
 }
 
 export function addListeners() {
-    document.getElementById("sourceSelected").addEventListener("change", showArticlesForSelectedSource);
+    document.getElementById("showNewsButton").addEventListener("click", showArticlesForSelectedSource);
 }
 
-function showArticlesForSelectedSource() {
+async function showArticlesForSelectedSource() {
     let sourceSelected = document.getElementById("sourceSelected").value;
-    articleService.showArticles(sourceSelected);
+    if (sourceSelected !== "") {
+        const articleService = await import(/* webpackChunkName: "articleService" */ './articleService');
+        articleService.showArticles(sourceSelected);
+    }
 }
 
 async function getSources() {

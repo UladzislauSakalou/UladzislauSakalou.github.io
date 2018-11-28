@@ -1,3 +1,6 @@
+@breakpoint1: 1180px;
+@breakpoint2: 886px;
+
 body {
     margin: 0;
 }
@@ -6,17 +9,16 @@ body {
     overflow: hidden;
     background-color: #f1f1f1;
     padding: 20px 10px;
-  }
-  
-  .header select {
-    float: right;
-    color: black;
-    text-align: center;
-    padding: 12px;
-    text-decoration: none;
-    font-size: 18px; 
-    line-height: 25px;
-    border-radius: 4px;
+    select {
+      float: right;
+      color: black;
+      text-align: center;
+      padding: 12px;
+      text-decoration: none;
+      font-size: 18px; 
+      line-height: 25px;
+      border-radius: 4px;
+    }
   }
 
   .appName {
@@ -56,30 +58,30 @@ body {
     font-size: 16px;
     text-align: center;
     opacity: 0.95;
-  }
 
-  .item img {
+    img {
       height: 150px;
       width: 245px;
-  }
+    }
 
-  .item a {
+    a {
       text-decoration: none;
       color: white;
-  }
+    } 
+  } 
   
-  /*float layout*/
   .float {
     max-width: 1200px;
     margin: 0 auto;
+    :after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
+    }
   }
-  .float:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
-  }
+
   .float-item {
     float: left;
     list-style: none;
@@ -91,13 +93,13 @@ body {
       text-align: right;
   }
 
-  @media only screen and (max-width: 1180px) {
+  @media only screen and (max-width: @breakpoint1) {
     .parallax {
         height: 1120px;
     }
   }
 
-  @media only screen and (max-width: 886px) {
+  @media only screen and (max-width: @breakpoint1) {
     .parallax {
         height: 1395px;
     }

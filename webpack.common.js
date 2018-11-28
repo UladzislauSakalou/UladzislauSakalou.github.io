@@ -1,13 +1,11 @@
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     entry: {
         app: './src/js/main.js'
     },
-    plugins: [
-        // new CleanWebpackPlugin(['dist'])
-    ],
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
@@ -15,18 +13,56 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
+                test: /\.less$/,
+                use: [{
+                    loader: 'style-loader'
+                }, {
+                    loader: 'css-loader'
+                }, {
+                    loader: 'less-loader'
+                }]
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
                 use: [
                     'file-loader'
                 ]
-        }
+            },
+            {
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                [
+                                    "@babel/preset-env",
+                                    {
+                                        "targets": {
+                                            "browsers": [
+                                                "last 2 versions",
+                                                "IE >= 11"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            ],
+                            plugins: [
+                                [
+                                    "@babel/plugin-syntax-dynamic-import"
+                                ]
+                            ]
+                        }
+                    },
+                    {
+                        loader: path.resolve(__dirname, 'loaders/custom-loader.js')
+                    }
+                ]
+            }
         ]
-    }
+    },
+    plugins: [
+        new FriendlyErrorsWebpackPlugin()
+    ]
 };
