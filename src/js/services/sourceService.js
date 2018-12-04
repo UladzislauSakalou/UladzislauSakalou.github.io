@@ -1,32 +1,19 @@
 import { Constants } from '../core/constants.js';
 
-export async function showSources() {
-    let response = await getSources();
-    response.sources.map(getSourceDetails).forEach(showSource);
-}
+let instance = null;
 
-export function addListeners() {
-    document.getElementById("showNewsButton").addEventListener("click", showArticlesForSelectedSource);
-}
+export class SourceService {
 
-async function showArticlesForSelectedSource() {
-    let sourceSelected = document.getElementById("sourceSelected").value;
-    if (sourceSelected !== "") {
-        const articleService = await import(/* webpackChunkName: "articleService" */ './articleService');
-        articleService.showArticles(sourceSelected);
+    constructor() {
+        if(!instance){
+            instance = this;
+        }
+    }
+    
+    async getSources() {
+        let response = await fetch(Constants.sourcesUrl);
+        return response.json();
     }
 }
 
-async function getSources() {
-    let response = await fetch(Constants.sourcesUrl);
-    return response.json();
-}
-
-function showSource(sourceDetails) {
-    document.getElementById("sourceSelected").innerHTML += sourceDetails;
-}
-
-function getSourceDetails({ id, name }) {
-    return `<option value="${id}">${name}</option>`
-}
 
