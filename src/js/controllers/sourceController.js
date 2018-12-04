@@ -1,5 +1,6 @@
-import { SourceService } from '../services/sourceService.js';
+import { SourceService } from '../services/sourceService';
 import { SourceView } from '../views/sourceView';
+import { Constants } from '../core/constants';
 
 export class SourceController {
 
@@ -12,7 +13,8 @@ export class SourceController {
 
     async showSources() {
         let response = await this.sourceService.getSources();
-        this.sourceView.render(response.sources);
+        this.validateResponse(response);
+        
     }
 
     async showArticlesForSelectedSource() {   
@@ -20,6 +22,18 @@ export class SourceController {
             const articleModule = await import(/* webpackChunkName: "articleController" */ './articleController');
             let articleController = new articleModule.ArticleController();
             articleController.showArticles(this.sourceView.selectedSource);
+        }
+    }
+
+    async validateResponse(response) {
+        if (response.status == Constants.okStatus) {
+            this.sourceView.render(response.sources);
+        }
+
+        if (response.status == Constants.errorStatus) {
+            const errorModule = await import(/* webpackChunkName: "errorController" */ './errorController');
+            let errorController = new errorModule.ErrorController();
+            errorController.handleError(response);
         }
     }
 }

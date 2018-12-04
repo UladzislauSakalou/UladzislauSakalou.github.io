@@ -2,7 +2,7 @@ import { Constants } from '../core/constants.js';
 
 let instance = null;
 
-export class SourceService {
+export class ErrorController {
 
     constructor() {
         if(!instance){
@@ -11,10 +11,9 @@ export class SourceService {
 
           return instance;
     }
-    
-    async getSources() {
-        let response = await fetch(Constants.sourcesUrl);
-        return response.json();
+
+    handleError({code, message}) {
+        alert(message);
     }
 }
 
