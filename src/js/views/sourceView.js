@@ -1,6 +1,6 @@
 export class SourceView {
 
-    constructor () {
+    constructor() {
         this.showArticlesForSelectedSource = null;
     }
 
@@ -15,7 +15,7 @@ export class SourceView {
     showSource(sourceDetails) {
         document.getElementById("sourceSelected").innerHTML += sourceDetails;
     }
-    
+
     getSourceDetails({ id, name }) {
         return `<option value="${id}">${name}</option>`
     }

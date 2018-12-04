@@ -1,5 +1,7 @@
 import { ArticleService } from '../services/articleService.js';
 import { ArticleView } from '../views/articleView.js';
+import * as validationService from '../services/validationService.js';
+
 
 export class ArticleController {
     constructor() {
@@ -9,6 +11,8 @@ export class ArticleController {
 
     async showArticles(source) {
         let response = await this.articleService.getArticles(source);
-        this.articleView.render(response.articles);
+        if (validationService.checkIfResponseValid(response)) {
+            this.articleView.render(response.articles);
+        }
     }
 }

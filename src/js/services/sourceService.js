@@ -1,4 +1,5 @@
 import { Constants } from '../core/constants.js';
+import * as requestProxyService from './requestProxyService.js';
 
 let instance = null;
 
@@ -13,7 +14,8 @@ export class SourceService {
     }
     
     async getSources() {
-        let response = await fetch(Constants.sourcesUrl);
+        let request = requestProxyService.getRequest(Constants.getMethod, Constants.sourcesUrl);
+        let response = await fetch(request);
         return response.json();
     }
 }

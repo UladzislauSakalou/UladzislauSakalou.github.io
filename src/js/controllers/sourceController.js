@@ -1,6 +1,6 @@
-import { SourceService } from '../services/sourceService';
+import * as validationService from '../services/validationService.js';
+import { SourceService } from '../services/sourceService'
 import { SourceView } from '../views/sourceView';
-import { Constants } from '../core/constants';
 
 export class SourceController {
 
@@ -13,27 +13,16 @@ export class SourceController {
 
     async showSources() {
         let response = await this.sourceService.getSources();
-        this.validateResponse(response);
-        
+        if (validationService.checkIfResponseValid(response)) {
+            this.sourceView.render(response.sources);
+        }
     }
 
-    async showArticlesForSelectedSource() {   
+    async showArticlesForSelectedSource() {
         if (this.sourceView.selectedSource) {
             const articleModule = await import(/* webpackChunkName: "articleController" */ './articleController');
             let articleController = new articleModule.ArticleController();
             articleController.showArticles(this.sourceView.selectedSource);
-        }
-    }
-
-    async validateResponse(response) {
-        if (response.status == Constants.okStatus) {
-            this.sourceView.render(response.sources);
-        }
-
-        if (response.status == Constants.errorStatus) {
-            const errorModule = await import(/* webpackChunkName: "errorController" */ './errorController');
-            let errorController = new errorModule.ErrorController();
-            errorController.handleError(response);
         }
     }
 }

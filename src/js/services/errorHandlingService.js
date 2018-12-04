@@ -1,8 +1,6 @@
-import { Constants } from '../core/constants.js';
-
 let instance = null;
 
-export class ErrorController {
+export class ErrorHandlingService {
 
     constructor() {
         if(!instance){
@@ -13,6 +11,7 @@ export class ErrorController {
     }
 
     handleError({code, message}) {
+        console.log(`error code: ${code}`);
         alert(message);
     }
 }
